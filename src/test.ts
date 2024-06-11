@@ -2,37 +2,44 @@ let a: number;
 let b: boolean;
 let c: string;
 
+function login (data: unknown): {
+  const data2 = data;
+  console.log(data2);
+};
+
 type Permission = 'admin' | 'manager' | "user";
 
-type BasicUser<A = boolean, P = string[]> = {
+type TuplePermission = [Permission, Permission];
+
+type BasicUser<A = boolean, P = TyplePermission> = {
   name: string;
   age: number;
   isAdmin: A;
-  permissions?: P[];
+  permissions?: P;
 };
 
 type AccountUser = {
   account: number;
 };
 
-type FullUser<A = boolean, P = string[]> = BasicUser<A, P> & AccountUser;
+type FullUser<A = boolean> = BasicUser<A> & AccountUser;
 
 
-let user: FullUser<boolean, Permission> = {
+let user: FullUser = {
   name: 'Nastiya',
   age: 26,
   isAdmin: true,
-  permissions: ['admin', 'manager', 'user'],
+  permissions: ['admin', 'manager'],
   account: 100,
 };
 
-let usersArray: BasicUser<boolean, Permission>[] = [user, user, user];
+let usersArray: FullUser[] = [user, user, user];
 
 function getFirst<T>(arr:T[]):T {
  return arr[0];
 };
 
-getFirst<BasicUser<boolean, Permission>>(usersArray);
+getFirst<BasicUser>(usersArray);
 
 type MathFunc = (a:number, b:number) => number;
 
