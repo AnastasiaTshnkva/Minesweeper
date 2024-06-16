@@ -20,7 +20,7 @@ const DepsForPerms: Record<Permission, DepartmentsOfPermissions> = {
     depName: 'sales',
     lvl: 10,
   },
-  'user' {
+  'user': {
     depName: 'sales',
     lvl: 5,
   }
