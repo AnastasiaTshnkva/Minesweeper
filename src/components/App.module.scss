@@ -1,9 +1,10 @@
-button {
+.button {
   background-color: pink;
   border: none;
   padding: 10px;
+  color: white;
+}
 
-  span {
-    color: white;
-  }
+.value {
+  font-size: 40px;
 }
