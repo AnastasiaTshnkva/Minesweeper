@@ -14,10 +14,8 @@ export function buildWebpack (options: BuildOptions) : webpack.Configuration {
   return  {
     mode: mode ?? 'development',
     entry: paths.entry,
-    // entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: paths.output,
-    // path: path.resolve(__dirname, 'build'),
     filename: '[name].[contenthash].js',
     clean: true,
   },
@@ -25,7 +23,7 @@ export function buildWebpack (options: BuildOptions) : webpack.Configuration {
   module: {
     rules: buildLoaders(options),
   },
-  resolve: buildResolve(),
+  resolve: buildResolve(options),
   devtool: isDev && 'inline-source-map',
   devServer: isDev ? buildDevServer(options) : undefined,
   };
