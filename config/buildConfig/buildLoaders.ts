@@ -26,6 +26,35 @@ export function buildLoaders ({mode}: BuildOptions): ModuleOptions['rules'] {
     ],
   };
 
+
+  const assetsLoader = {
+    test: /\.(png|jpg|jpeg|gif)$/i,
+    type: 'asset/resource',
+  };
+
+  const svgrLoader = {
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: [
+        { 
+          loader: '@svgr/webpack', 
+        options: { 
+          icon: true,
+          // svgoConfig: {
+          //   plugins: [
+          //     {
+          //       name: 'convertColors',
+          //       params: {
+          //         curretnColor: true,
+          //       }
+          //     }
+          //   ],
+          // },
+        },
+        }
+      ],
+  };
+
   const tsLoader = {
     test: /\.tsx?$/,
     use: 'ts-loader',
@@ -33,7 +62,9 @@ export function buildLoaders ({mode}: BuildOptions): ModuleOptions['rules'] {
   }
 
   return [
+    assetsLoader,
     scssLoader, 
     tsLoader,
+    svgrLoader,
   ];
 };

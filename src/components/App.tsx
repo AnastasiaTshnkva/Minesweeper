@@ -1,6 +1,9 @@
 import {useState} from 'react';
 import classes from './App.module.scss';
 import { Link, Outlet } from 'react-router-dom';
+import bombPng from '@/assets/images/bomb.png';
+import flagPng from '@/assets/images/flag.png';
+import CrossIcon from '@/assets/icons/cloud-rain-alt.svg';
 
 export const App = () => {
   const [counter, setCounter] = useState<number>(0);
@@ -9,6 +12,13 @@ export const App = () => {
 
   return (
     <div>
+      <div>
+        <img className={classes.icon} src={bombPng} alt='bomb' />
+        <img className={classes.icon} src={flagPng} alt='flag' />
+      </div>
+      <div>
+        <CrossIcon className={classes.interface_icon} stroke='pink' />
+      </div>
       <Link to={'/about'}>About</Link>
       <br/>
       <Link to={'/game'}>Game</Link>
