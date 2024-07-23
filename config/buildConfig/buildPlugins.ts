@@ -3,6 +3,7 @@ import {Configuration} from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import {BuildOptions} from './types/types';
+import path from 'path';
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -16,7 +17,10 @@ export function buildPlugins ({mode, paths, analyzer, platform}:BuildOptions) : 
   const isProd = mode === 'production';
 
   const plugins: Configuration['plugins'] = [
-    new HtmlWebpackPlugin({ template: paths.html}),
+    new HtmlWebpackPlugin({ 
+      template: paths.html, 
+      favicon: path.resolve(paths.public, 'favicon.png'),
+    }),
     new DefinePlugin({
       __PLATFORM__: JSON.stringify(platform),
     }),
