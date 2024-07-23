@@ -5,13 +5,27 @@ import bombPng from '@/assets/images/bomb.png';
 import flagPng from '@/assets/images/flag.png';
 import CrossIcon from '@/assets/icons/cloud-rain-alt.svg';
 
+// function TODO(a:number) {
+//   console.log('TODO');
+// }
+
 export const App = () => {
   const [counter, setCounter] = useState<number>(0);
 
   const increment = () => setCounter(prev => prev + 1);
 
+
+  // if (__PLATFORM__ === 'mobile') {
+  //   return (<div>ISMOBILEPLATFORM</div>)
+  // };
+
+  // if (__PLATFORM__ === 'desctop') {
+  //   return (<div>ISDESCTOPPLATFORM</div>)
+  // };
+
   return (
     <div>
+      <h1>Platform = {__PLATFORM__}</h1>
       <div>
         <img className={classes.icon} src={bombPng} alt='bomb' />
         <img className={classes.icon} src={flagPng} alt='flag' />
