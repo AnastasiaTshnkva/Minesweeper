@@ -8,6 +8,7 @@ import path from 'path';
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 
 
@@ -24,7 +25,6 @@ export function buildPlugins ({mode, paths, analyzer, platform}:BuildOptions) : 
     new DefinePlugin({
       __PLATFORM__: JSON.stringify(platform),
     }),
-    
   ]
 
   if(isDev) {
@@ -39,6 +39,11 @@ export function buildPlugins ({mode, paths, analyzer, platform}:BuildOptions) : 
     plugins.push(new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:8].css',
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: path.resolve(paths.public, 'locales'), to: path.resolve(paths.output, 'locales') },
+      ],
     }),);
   };
 
