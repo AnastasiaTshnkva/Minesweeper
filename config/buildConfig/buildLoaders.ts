@@ -63,6 +63,27 @@ export function buildLoaders ({mode}: BuildOptions): ModuleOptions['rules'] {
   
   // }
 
+
+  const bableLoader = {
+    test: /\.tsx?$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: [
+          '@babel/preset-env',
+          '@babel/preset-typescript',
+          [
+            '@babel/preset-react', 
+            {
+              runtime: isDev ?'automatic' : 'classic',
+            },
+          ],
+      ]
+      }
+    }
+  }
+
   const tsLoader = {
     exclude: /node_modules/,
     test: /\.tsx?$/,
@@ -82,7 +103,8 @@ export function buildLoaders ({mode}: BuildOptions): ModuleOptions['rules'] {
   return [
     assetsLoader,
     scssLoader, 
-    tsLoader,
+    // tsLoader,
+    bableLoader,
     svgrLoader,
   ];
 };
