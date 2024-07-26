@@ -1,11 +1,12 @@
 import {ModuleOptions} from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BuildOptions } from './types/types';
+import { buildBableLoader } from './bable/buildBableLoader';
 
 const ReactRefreshTypeScript = require('react-refresh-typescript');
 
-export function buildLoaders ({mode}: BuildOptions): ModuleOptions['rules'] {
-  const isDev = mode === 'development';
+export function buildLoaders (options: BuildOptions): ModuleOptions['rules'] {
+  const isDev = options.mode === 'development';
 
   const cssLoaderWithModules = {
     loader: 'css-loader',
@@ -57,32 +58,8 @@ export function buildLoaders ({mode}: BuildOptions): ModuleOptions['rules'] {
       ],
   };
 
-  // const tsLoader = {
-  //   test: /\.tsx?$/,
-  //   use: 'ts-loader',
-  
-  // }
 
-
-  const bableLoader = {
-    test: /\.tsx?$/,
-    exclude: /node_modules/,
-    use: {
-      loader: 'babel-loader',
-      options: {
-        presets: [
-          '@babel/preset-env',
-          '@babel/preset-typescript',
-          [
-            '@babel/preset-react', 
-            {
-              runtime: isDev ?'automatic' : 'classic',
-            },
-          ],
-      ]
-      }
-    }
-  }
+  const bableLoader = buildBableLoader(options);
 
   const tsLoader = {
     exclude: /node_modules/,

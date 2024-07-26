@@ -25,7 +25,7 @@ export const App = () => {
 
   return (
     <div>
-      <h1>Platform = {__PLATFORM__}</h1>
+      <h1 data-testid={'App.DataTestId'}>Platform = {__PLATFORM__}</h1>
       <div>
         <img className={classes.icon} src={bombPng} alt='bomb' />
         <img className={classes.icon} src={flagPng} alt='flag' />
